@@ -5,16 +5,20 @@ import CDPlayerStage from './components/CDPlayerStage';
 import CakeAndGiftsStage from './components/CakeAndGiftsStage';
 import FloatingMusicButton from './components/FloatingMusicButton';
 import FloralCurtainTransition from './components/FloralCurtainTransition';
+import Preloader from './components/Preloader';
 import lovesongAudio from './assets/Lovesong.mp3';
 import bgPc from './assets/background pc.jpg';
 import bgMobile from './assets/background mobile.jpg';
 
 export default function App() {
+  // Preloader state: true on first load to buffer all GIF assets
+  const [isLoading, setIsLoading] = useState(true);
+
   // Views: 'hero' (Screen 1) | 'cd_stage' (CD insert stage) | 'cake_stage' (Screen 3: Cake Time & Your Gifts)
   const [currentView, setCurrentView] = useState('hero');
 
-  // Curtain transition state: 'idle' | 'closing' | 'closed' | 'opening'
-  const [curtainStage, setCurtainStage] = useState('idle');
+  // Curtain transition state: starts 'closed' behind the preloader so it can open grandly
+  const [curtainStage, setCurtainStage] = useState('closed');
 
   // Track if music has been initiated by inserting the CD
   const [hasStartedMusic, setHasStartedMusic] = useState(false);
@@ -77,6 +81,17 @@ export default function App() {
         }, 1000);
       }, 700);
     }, 950);
+  };
+
+  // Called when initial preloader finishes caching all GIFs
+  const handlePreloaderComplete = () => {
+    setIsLoading(false);
+    setTimeout(() => {
+      setCurtainStage('opening');
+      setTimeout(() => {
+        setCurtainStage('idle');
+      }, 1000);
+    }, 250);
   };
 
   // 1. When clicking "Start" on Screen 1 (Hero):
@@ -206,6 +221,9 @@ export default function App() {
 
       {/* 3. Custom Animated Floral Theater Curtain Transition */}
       <FloralCurtainTransition stage={curtainStage} />
+
+      {/* 4. Initial Asset Preloader with Cute Running Cat */}
+      {isLoading && <Preloader onComplete={handlePreloaderComplete} />}
     </div>
   );
 }
