@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --rose-primary: #e11d48;
+    --rose-dark: #9f1239;
+    --rose-deep: #881337;
+    --rose-light: #fda4af;
+    --rose-soft: #ffe4e6;
+    --pink-bg: #fff1f5;
+  }
+
+  body {
+    font-family: 'Playfair Display', Georgia, serif;
+    background-color: #fff0f5;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+}
+
+/* Luxury Font Families */
+.font-playfair {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-outfit {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Glassmorphism effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(244, 63, 94, 0.28);
+  box-shadow: 0 25px 60px -15px rgba(225, 29, 72, 0.15),
+              0 0 35px 2px rgba(251, 113, 133, 0.12),
+              inset 0 1px 2px rgba(255, 255, 255, 0.95);
+}
+
+.glass-card-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 30px 70px -15px rgba(225, 29, 72, 0.22),
+              0 0 40px 4px rgba(244, 63, 94, 0.2);
+}
+
+/* Glowing romantic red borders */
+.rose-glow-border {
+  position: relative;
+}
+
+.rose-glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(225, 29, 72, 0.65), rgba(251, 113, 133, 0.4), rgba(244, 63, 94, 0.75), rgba(253, 164, 175, 0.5));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Pure Glowing Red Flow (NO white streak, glowing moving red tones only) */
+@keyframes redFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.word-shimmer-sweep {
+  background: linear-gradient(
+    120deg,
+    #700a25 0%,
+    #9f1239 20%,
+    #be123c 38%,
+    #e11d48 50%,
+    #f43f5e 62%,
+    #be123c 80%,
+    #700a25 100%
+  );
+  background-size: 240% 240%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: redFlow 2.8s ease-in-out infinite;
+  text-shadow: 0 0 20px rgba(225, 29, 72, 0.25);
+}
+
+/* Theater Curtain Styling */
+.curtain-panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 60;
+  will-change: transform;
+}
+
+/* Choreographed Entrance Animations for Gifts Stage */
+@keyframes fadeInUpScale {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes popInGift {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.88);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-card-entrance {
+  animation: fadeInUpScale 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-text-entrance {
+  animation: fadeInUpScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.22s backwards;
+}
+
+.animate-gift-item {
+  animation: popInGift 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #fff0f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #fda4af;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #fb7185;
+}
+
+/* ── Envelope Paper Shake ── */
+@keyframes paperShake {
+  0%   { transform: translateX(0px) translateY(0px) rotate(0deg); }
+  10%  { transform: translateX(-7px) translateY(-5px) rotate(-2.5deg); }
+  20%  { transform: translateX(7px)  translateY(3px)  rotate(2.5deg); }
+  30%  { transform: translateX(-6px) translateY(-4px) rotate(-2deg); }
+  40%  { transform: translateX(6px)  translateY(2px)  rotate(2deg); }
+  50%  { transform: translateX(-4px) translateY(-3px) rotate(-1.5deg); }
+  60%  { transform: translateX(4px)  translateY(2px)  rotate(1.5deg); }
+  70%  { transform: translateX(-2px) translateY(-2px) rotate(-1deg); }
+  80%  { transform: translateX(2px)  translateY(1px)  rotate(0.8deg); }
+  90%  { transform: translateX(-1px) translateY(0px)  rotate(-0.3deg); }
+  100% { transform: translateX(0px)  translateY(0px)  rotate(0deg); }
+}
+
+.animate-paper-shake {
+  animation: paperShake 0.65s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+/* ── Letter Peek (slide letter slightly above envelope after flap opens) ── */
+@keyframes letterPeek {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-28px); }
+}
+
+.animate-letter-peek {
+  animation: letterPeek 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* ── Typewriter cursor blink ── */
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink-cursor {
+  animation: blinkCursor 0.7s steps(1) infinite;
+}
